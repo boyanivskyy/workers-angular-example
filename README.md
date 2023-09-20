@@ -1,3 +1,9 @@
+# Results
+
+-   execTime without worker 8.600000023841858
+-   execTime for everything in worker 231.89999997615814
+-   execTime creating new worker for each deepness value 331.89999997615814
+
 # TestWebWorkers
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.2.
