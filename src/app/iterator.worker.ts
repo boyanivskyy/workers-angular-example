@@ -14,4 +14,5 @@ addEventListener('message', (event) => {
     }
 
     postMessage('done');
+    close();
 });

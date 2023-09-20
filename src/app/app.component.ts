@@ -6,29 +6,36 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-    readonly numberOfIterations = 1000000;
-    readonly deepness = 20;
+    readonly numberOfIterations = 1000000000;
+    readonly numberOfWorkers = 10;
 
-    constructor() {
+    constructor() {}
+
+    ngOnInit() {
+        console.log('execTime numberOfIterations', this.numberOfIterations);
+        console.log(
+            'execTime numberOfWorkers or deepness of loop if single thread',
+            this.numberOfWorkers
+        );
+
         const start = performance.now();
         for (let i = 0; i < this.numberOfIterations; i++) {
-            for (let j = 0; j < this.deepness; j++) {}
+            for (let j = 0; j < this.numberOfWorkers; j++) {}
         }
 
         const execTime = performance.now() - start;
         console.log('execTime without worker', execTime);
-    }
-
-    ngOnInit() {
-        const start = performance.now();
+        // ####################################
+        const start1 = performance.now();
         this.execInWorker({
             numberOfIterations: this.numberOfIterations,
-            deepness: this.deepness,
+            deepness: this.numberOfWorkers,
         }).then((result) => {
-            const execTime = performance.now() - start;
+            const execTime = performance.now() - start1;
             console.log('execTime for everything in worker', execTime);
         });
 
+        // ####################################
         const start2 = performance.now();
         this.execInWorker2().then((result) => {
             const execTime = performance.now() - start2;
@@ -64,7 +71,7 @@ export class AppComponent implements OnInit {
     // create worker for in each iteration on deepness and merge results
     private execInWorker2<T extends any>(): Promise<T> {
         const workers = [];
-        for (let i = 0; i < this.deepness; i++) {
+        for (let i = 0; i < this.numberOfWorkers; i++) {
             workers.push(
                 new Promise((resolve, reject) => {
                     // create worker

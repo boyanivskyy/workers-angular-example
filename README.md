@@ -1,8 +1,10 @@
 # Results
 
--   execTime without worker 8.600000023841858
--   execTime for everything in worker 231.89999997615814
--   execTime creating new worker for each deepness value 331.89999997615814
+-   execTime numberOfIterations 1000000000
+-   execTime numberOfWorkers or deepness of loop if single thread 10
+-   execTime without worker 4430.89ms
+-   execTime creating new worker for each deepness value 3350.10ms
+-   execTime for everything in worker 14988.10ms
 
 # TestWebWorkers
 
